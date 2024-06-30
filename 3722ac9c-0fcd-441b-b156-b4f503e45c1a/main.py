@@ -4,49 +4,39 @@ from surmount.data import Asset, InstitutionalOwnership
 import pandas_ta as ta
 import pandas as pd
 
-def SMAVol(ticker, data, length):
-   '''Calculate the moving average of trading volume
-
-   :param ticker: a string ticker
-   :param data: data as provided from the OHLCV data function
-   :param length: the window
-
-   :return: list with float SMA
-   '''
-   close = [i[ticker]["volume"] for i in data]
-   d = ta.sma(pd.Series(close), length=length)
-   if d is None:
-      return None
-   return d.tolist()
-
 class TradingStrategy(Strategy):
-   def __init__(self):
-      self.tickers = ["VIRT"]
-      self.data_list = []
+    def __init__(self):
+        self.tickers = ["NVDA"]
+        self.data_list = []
 
-   @property
-   def interval(self):
-      return "1day"
+    @property
+    def interval(self):
+        return "1day"
 
-   @property
-   def assets(self):
-      return self.tickers
+    @property
+    def assets(self):
+        return self.tickers
 
-   @property
-   def data(self):
-      return self.data_list
+    @property
+    def data(self):
+        return self.data_list
 
-   def run(self, data):
-      vols = [i["VIRT"]["volume"] for i in data["ohlcv"]]
-      smavols = SMAVol("VIRT", data["ohlcv"], 30)
-      smavols2 = SMAVol("VIRT", data["ohlcv"], 10)
+    def run(self, data):
+        closing_prices = [i["NVDA"]["close"] for i in data["ohlcv"]]
+        opening_prices = [i["NVDA"]["open"] for i in data["ohlcv"]]
 
-      if len(vols)<=4:
+        if len(closing_prices) < 2:
             return TargetAllocation({})
 
-      try:
-         if smavols2[-1]/smavols[-1]-1>0:
-               out = smavols2[-1]/smavols[-1]-1
-         else: out = 0
-      except: return None
-      return TargetAllocation({"VIRT": min(0.95, (out*5)**(1/3))})
+        last_day_closing_price = closing_prices[-2]
+        last_day_opening_price = opening_prices[-2]
+
+        if last_day_closing_price > last_day_opening_price:
+            action = "BUY"  # Buy if closing price is higher than opening price
+        else:
+            action = "SELL"  # Sell if closing price is lower than opening price
+
+        log.info(f"Action to take at market open of the next day: {action}")
+
+        # Return an empty TargetAllocation for this example
+        return TargetAllocation({})

@@ -20,6 +20,7 @@ class TradingStrategy(Strategy):
         # Check if we have at least 6 days of data (5 days prior + last day)
         if len(ohlcv) > 5:
             last_day = ohlcv[-1][self.ticker]
+            two_days_ago = ohlcv[-2][self.ticker]
             five_days_ago = ohlcv[-5][self.ticker]
 
             # Closing price less than 100.00% of opening price condition

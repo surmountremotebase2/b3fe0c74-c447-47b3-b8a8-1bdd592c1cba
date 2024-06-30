@@ -17,7 +17,7 @@ class TradingStrategy(Strategy):
 
     @property
     def assets(self):
-        return self.tickers
+        return [Asset(ticker) for ticker in self.tickers]
 
     @property
     def data(self):

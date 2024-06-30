@@ -22,8 +22,8 @@ class TradingStrategy(Strategy):
             last_day = ohlcv[-1][self.ticker]
             five_days_ago = ohlcv[-5][self.ticker]
 
-            # Closing price less than 98.42% of opening price condition
-            if last_day["close"] < last_day["open"] * 0.9842:
+            # Closing price less than 100.00% of opening price condition
+            if last_day["close"] < last_day["open"] * 1:
                 should_buy = True
             else:
                 # Day market change 5 days ago vs last day

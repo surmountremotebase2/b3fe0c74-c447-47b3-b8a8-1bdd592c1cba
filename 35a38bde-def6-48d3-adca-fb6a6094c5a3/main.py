@@ -3,7 +3,7 @@ from surmount.logging import log
 
 class TradingStrategy(Strategy):
     def __init__(self):
-        self.ticker = "NVDA"  # Example: Trading Apple stocks
+        self.ticker = "ETH"  # Example: Trading Apple stocks
 
     @property
     def assets(self):
@@ -48,13 +48,13 @@ if __name__ == "__main__":
     # Simulated data format similar to what your Surmount environment provides
     sample_data = {
         "ohlcv": [
-            {"NVDA": {"open": 150.0, "high": 155.0, "low": 148.0, "close": 152.0}},
-            {"NVDA": {"open": 152.5, "high": 154.0, "low": 149.5, "close": 151.0}},
-            {"NVDA": {"open": 151.0, "high": 153.0, "low": 148.0, "close": 150.0}},
-            {"NVDA": {"open": 150.5, "high": 153.5, "low": 149.0, "close": 152.0}},
-            {"NVDA": {"open": 152.0, "high": 156.0, "low": 151.0, "close": 154.0}},
-            {"NVDA": {"open": 154.5, "high": 157.0, "low": 152.5, "close": 155.0}},
-            {"NVDA": {"open": 155.0, "high": 157.5, "low": 153.0, "close": 156.0}},
+            {"ETH": {"open": 150.0, "high": 155.0, "low": 148.0, "close": 152.0}},
+            {"ETH": {"open": 152.5, "high": 154.0, "low": 149.5, "close": 151.0}},
+            {"ETH": {"open": 151.0, "high": 153.0, "low": 148.0, "close": 150.0}},
+            {"ETH": {"open": 150.5, "high": 153.5, "low": 149.0, "close": 152.0}},
+            {"ETH": {"open": 152.0, "high": 156.0, "low": 151.0, "close": 154.0}},
+            {"ETH": {"open": 154.5, "high": 157.0, "low": 152.5, "close": 155.0}},
+            {"ETH": {"open": 155.0, "high": 157.5, "low": 153.0, "close": 156.0}},
         ]
     }
 
